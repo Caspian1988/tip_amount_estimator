@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Tip Calculator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body { background-color: #121212; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+    .card { background-color: #1e1e1e; border: 1px solid #333; border-radius: 12px; padding: 24px; width: 100%; max-width: 400px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+    h2 { color: #2ecc71; text-align: center; margin-bottom: 20px; }
+    .developer-credit { color: #888; font-size: 0.85rem; text-align: center; margin-bottom: 4px; }
+    
+    label { display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 6px; margin-top: 14px; }
+    input { width: 100%; padding: 12px; background: #2b2b2b; border: 1px solid #444; color: #fff; border-radius: 6px; font-size: 1rem; }
+    
+    .tip-btns { display: flex; gap: 8px; margin-top: 8px; }
+    .tip-btns button { flex: 1; padding: 10px; background: #333; color: #2ecc71; border: 1px solid #2ecc71; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.9rem; }
+    .tip-btns button:hover { background: #2ecc71; color: #000; }
+    
+    .results { margin-top: 24px; padding-top: 16px; border-top: 1px solid #333; }
+    .row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; }
+    .row.total { font-size: 1.25rem; font-weight: bold; color: #2ecc71; margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Tip Calculator</h2>
+    <p class="developer-credit">Developed by Ramin Baghirov</p>
+
+    
+    <label>Bill Amount ($)</label>
+    <input type="number" id="bill" placeholder="0.00" step="0.01" oninput="calculateTip()">
+
+    <label>Select Tip Percentage</label>
+    <div class="tip-btns">
+      <button onclick="setTip(15)">15%</button>
+      <button onclick="setTip(18)">18%</button>
+      <button onclick="setTip(20)">20%</button>
+    </div>
+
+    <label for="tipPercent">Custom Tip (%)</label>
+    <input type="number" id="tipPercent" value="18" oninput="calculateTip()">
+
+    <label for="people">Split Between (People)</label>
+    <input type="number" id="people" value="1" min="1" oninput="calculateTip()">
+
+    <div class="results">
+      <div class="row">
+        <span>Tip Amount:</span>
+        <span id="tipAmount">$0.00</span>
+      </div>
+      <div class="row">
+        <span>Total Bill:</span>
+        <span id="totalAmount">$0.00</span>
+      </div>
+      <div class="row total">
+        <span>Per Person:</span>
+        <span id="perPerson">$0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setTip(percentage) {
+      document.getElementById('tipPercent').value = percentage;
+      calculateTip();
+    }
+
+    function calculateTip() {
+      const bill = parseFloat(document.getElementById('bill').value) || 0;
+      const tipPercent = parseFloat(document.getElementById('tipPercent').value) || 0;
+      const people = parseInt(document.getElementById('people').value) || 1;
+
+      const tipAmount = bill * (tipPercent / 100);
+      const totalAmount = bill + tipAmount;
+      const perPerson = totalAmount / people;
+
+      document.getElementById('tipAmount').textContent = `$${tipAmount.toFixed(2)}`;
+      document.getElementById('totalAmount').textContent = `$${totalAmount.toFixed(2)}`;
+      document.getElementById('perPerson').textContent = `$${perPerson.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
