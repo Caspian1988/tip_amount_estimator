@@ -3,7 +3,12 @@
 A clean, responsive web application to quickly calculate bill tips and split totals among friends.
 
 ## 🚀 Live Demo
-Check out the live app here: **[Live Demo](https://<your-username>.github.io/<your-repo-name>/)**
+
+[![DEMO LIVE TRACKER](https://img.shields.io/badge/DEMO-LIVE_TRACKER-brightgreen?style=for-the-badge&logo=github)](https://github.com/Caspian1988/tip_amount_estimator)
+
+
+
+
 
 ## ✨ Features
 - Calculate tip based on custom percentages
